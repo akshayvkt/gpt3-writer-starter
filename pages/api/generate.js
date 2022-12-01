@@ -7,7 +7,6 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const basePromptPrefix = 
-
 `
 Explain it twice, first giving an easy-to-understand explanation, next giving an explanation using extremely easy-to-grasp metaphors.
 `;
@@ -17,9 +16,9 @@ const generateAction = async (req, res) => {
 
   const baseCompletion = await openai.createCompletion({
     model: 'text-davinci-003',
-    prompt: `${basePromptPrefix}\n${req.body.userInput}\n`,
-    temperature: 0.8,
-    max_tokens: 300,
+    prompt: `${basePromptPrefix}${req.body.userInput}`,
+    temperature: 0.7,
+    max_tokens: 250,
   });
   
   const basePromptOutput = baseCompletion.data.choices.pop();
